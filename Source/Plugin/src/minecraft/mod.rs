@@ -149,7 +149,11 @@ unsafe fn entry_sound(fighter: &mut L2CAgentBase) {
 "sound_downdamaged", "sound_downdamaged3", "sound_downdamageu", "sound_downdamageu3"] , category = ACMD_SOUND, low_priority )]
 unsafe fn damage_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6
+    if  WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
+	    ||
+	WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5
+	    ||
+	WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6
 	    ||
 	   WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 {
         acmd!(lua_state,{
