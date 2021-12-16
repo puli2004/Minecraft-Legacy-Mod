@@ -512,7 +512,7 @@ unsafe fn win2_effect(fighter: &mut L2CAgentBase) {
         acmd!(lua_state,{
 			frame(Frame=30)
 			if(is_excute){
-			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("have"), 0, 0, 0, 0, 0, 0, 1, true)
+			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
 			}
 			frame(Frame=40)
 			if(is_excute){
@@ -520,7 +520,7 @@ unsafe fn win2_effect(fighter: &mut L2CAgentBase) {
 		    }
 			frame(Frame=50)
 			if(is_excute){
-			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("have"), 0, 0, 0, 0, 0, 0, 1, true)
+			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
 			}
 			frame(Frame=60)
 			if(is_excute){
@@ -528,7 +528,7 @@ unsafe fn win2_effect(fighter: &mut L2CAgentBase) {
 			}
 			frame(Frame=66)
 			if(is_excute){
-			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("have"), 0, 0, 0, 0, 0, 0, 1, true)
+			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
 			}
 			frame(Frame=76)
 			if(is_excute){
@@ -536,7 +536,7 @@ unsafe fn win2_effect(fighter: &mut L2CAgentBase) {
 			}
 			frame(Frame=82)
 			if(is_excute){
-			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("have"), 0, 0, 0, 0, 0, 0, 1, true)
+			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
 			}
 			frame(Frame=92)
 			if(is_excute){
@@ -544,7 +544,7 @@ unsafe fn win2_effect(fighter: &mut L2CAgentBase) {
 			}
 			frame(Frame=98)
 			if(is_excute){
-			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("have"), 0, 0, 0, 0, 0, 0, 1, true)
+			EFFECT_FOLLOW(hash40("pickel_elytra_smoke"), hash40("haver"), 0, 0, 0, 0, 0, 0, 1, true)
 			}
 			frame(Frame=108)
 			if(is_excute){
