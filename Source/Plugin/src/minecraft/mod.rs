@@ -88,9 +88,31 @@ unsafe fn appealhi_sound(fighter: &mut L2CAgentBase) {
 #[acmd_script( agent = "pickel", scripts = ["sound_entryl", "sound_entryr"] , category = ACMD_SOUND, low_priority )]
 unsafe fn entry_sound(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
-	    ||
-	   WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7{
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4{
+        acmd!(lua_state,{
+            frame(Frame=2)
+            if(is_excute){
+                PLAY_SE(hash40("se_pickel_left_stone_02_m"))
+	    }
+	    frame(Frame=25)
+	    if(is_excute){
+                PLAY_SE(hash40("se_pickel_left_stone_03_m"))
+	    }
+	    frame(Frame=50)
+	    if(is_excute){
+                PLAY_SE(hash40("se_pickel_right_stone_04_m"))
+	    }
+	    frame(Frame=75)
+	    if(is_excute){
+                PLAY_SE(hash40("se_pickel_step_stone01_m"))
+	    }
+	    frame(Frame=30)
+	    if(is_excute){
+                PLAY_SE(hash40("se_pickel_left_stone_01_m"))
+            }
+        });
+    }
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7{
         acmd!(lua_state,{
             frame(Frame=3)
             if(is_excute){
