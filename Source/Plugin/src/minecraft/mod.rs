@@ -343,7 +343,33 @@ unsafe fn win2_sound(fighter: &mut L2CAgentBase) {
 
 
 ///////////////////////////////////////////////////////////////////Effects\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-#[acmd_script( agent = "pickel", scripts = ["effect_appeallwr", "effect_appeallwr"] , category = ACMD_EFFECT, low_priority )]
+#[acmd_script( agent = "pickel", scripts = ["effect_entryr", "effect_entryl"] , category = ACMD_EFFECT, low_priority )]
+unsafe fn entry_effect(fighter: &mut L2CAgentBase) {
+    let lua_state = fighter.lua_state_agent;
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 {
+        acmd!(lua_state,{
+            if(is_excute){
+			frame(Frame=1)
+            }
+        });
+    }
+    else{
+        acmd!(lua_state, {
+			frame(Frame=30)
+			if(is_excute){
+				EFFECT(hash40("pickel_block_break_stone"), hash40("top"), -4.5, 13.5, -0.25, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+			}
+			frame(Frame=63)
+			if(is_excute){
+				EFFECT(hash40("pickel_block_break_stone"), hash40("top"), -4.5, 4.5, -0.25, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, true)
+			}
+		});
+	}
+}
+
+
+
+#[acmd_script( agent = "pickel", scripts = ["effect_appeallwr", "effect_appeallwl"] , category = ACMD_EFFECT, low_priority )]
 unsafe fn appeallw_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 {
@@ -405,7 +431,7 @@ unsafe fn appealhi_effect(fighter: &mut L2CAgentBase) {
 	}
 }
 
-#[acmd_script( agent = "pickel", scripts = ["effect_appealsr", "effect_appealsr"] , category = ACMD_EFFECT, low_priority )]
+#[acmd_script( agent = "pickel", scripts = ["effect_appealsr", "effect_appealsl"] , category = ACMD_EFFECT, low_priority )]
 unsafe fn appealsr_effect(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4 {
@@ -578,7 +604,7 @@ unsafe fn appeallw_game(fighter: &mut L2CAgentBase) {
 #[acmd_script( agent = "pickel", scripts = ["game_entryr", "game_entryl"] , category = ACMD_GAME, low_priority )]
 unsafe fn entry_game(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
+    if     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
 	    ||
 	   WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5
 	    ||
@@ -645,6 +671,7 @@ pub fn install(){
 	win2_sound,
 ////////////////////////////////////////////////////////////////////Sounds\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	
 ///////////////////////////////////////////////////////////////////Effects\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	
+	entry_effect,
 	appeallw_effect,
 	appealhi_effect,
 	appealsr_effect,
