@@ -18,7 +18,6 @@ C07 = Enderman = 7
 
 /*Note C00 and C01 will not be included as they are fine in-game.
 Both Steve and Alex are Minecraft Representatives
-
 C02 and C03 are a mix of Minecraft and Minecraft dungeons
 C04, C05, C06, C07 all represent Minecraft and Minecraft dungeons. C05 is more of the old Minecraft. And EVERYONE is in this Script
 */
@@ -604,7 +603,7 @@ unsafe fn appeallw_game(fighter: &mut L2CAgentBase) {
 #[acmd_script( agent = "pickel", scripts = ["game_entryr", "game_entryl"] , category = ACMD_GAME, low_priority )]
 unsafe fn entry_game(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
-    if     WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
 	    ||
 	   WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 5
 	    ||
@@ -621,33 +620,7 @@ unsafe fn entry_game(fighter: &mut L2CAgentBase) {
         acmd!(lua_state, {
 			if(is_excute){
 				WorkModule::set_int(FIGHTER_PICKEL_CRAFT_WEAPON_KIND_PICK, FIGHTER_PICKEL_INSTANCE_WORK_ID_INT_REQUEST_HAVE_CRAFT_WEAPON_KIND)
-			}
-			frame(Frame=90)
-			WorkModule::is_flag(FIGHTER_PICKEL_INSTANCE_WORK_ID_FLAG_IS_SUPER_SUDDEN_DEATH)
-			if(0x36c760(false, true)){
-				if(is_excute){
-					battle_object_module_accessor()
-					methodlib::L2CValue::L2CValue(void*)()
 				}
-				else{
-					methodlib::L2CValue::L2CValue(lib::L2CValueconst&)()
-				}
-			}
-			methodlib::L2CValue::as_pointer()const()
-			create_table()
-			frame(Frame=118)
-			WorkModule::is_flag(FIGHTER_PICKEL_INSTANCE_WORK_ID_FLAG_IS_SUPER_SUDDEN_DEATH)
-			if(0x36c760(false, false)){
-				if(is_excute){
-					battle_object_module_accessor()
-					methodlib::L2CValue::L2CValue(void*)()
-				}
-				else{
-					methodlib::L2CValue::L2CValue(lib::L2CValueconst&)()
-				}
-			}
-			methodlib::L2CValue::as_pointer()const()
-			create_table()
 			frame(Frame=119)
 			if(is_excute){
 				WorkModule::on_flag(Flag=FIGHTER_PICKEL_INSTANCE_WORK_ID_FLAG_REQUEST_REMOVE_HAVE_CRAFT_WEAPON)
