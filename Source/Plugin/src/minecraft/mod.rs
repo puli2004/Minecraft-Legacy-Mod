@@ -111,7 +111,9 @@ unsafe fn entry_sound(fighter: &mut L2CAgentBase) {
             }
         });
     }
-    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7{
+    if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6
+	||
+	WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7{
         acmd!(lua_state,{
             frame(Frame=3)
             if(is_excute){
@@ -583,7 +585,9 @@ unsafe fn appeallw_game(fighter: &mut L2CAgentBase) {
     let lua_state = fighter.lua_state_agent;
     if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 4
 	    ||
-	   WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 {
+       WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6
+	    ||
+       WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 7 {
         acmd!(lua_state,{
             if(is_excute){
               WorkModule::on_flag(Flag=FIGHTER_PICKEL_INSTANCE_WORK_ID_FLAG_REQUEST_REMOVE_HAVE_CRAFT_WEAPON)
