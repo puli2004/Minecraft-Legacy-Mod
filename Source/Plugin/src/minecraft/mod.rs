@@ -1,8 +1,13 @@
+
 use smash::lua2cpp::L2CAgentBase;
 use smashline::*;
 use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::app::lua_bind::*;
+use smash::lua2cpp::*;
+use smash::phx::Hash40;
+
+
 
 /*
 Slots:
@@ -22,6 +27,13 @@ C02 and C03 are a mix of Minecraft and Minecraft dungeons
 C04, C05, C06, C07 all represent Minecraft and Minecraft dungeons. C05 is more of the old Minecraft. And EVERYONE is in this Script
 */
 
+//Status Script Death sounds
+/* 	0 = Blast zone or hero blasing enderman out of existance
+	1 = Star KO
+	2 = Screen KO, Yes this is also giga punch.
+	3 = Star KO if galaga grabs you
+	Stamina is a situation
+*/
 
 
 
@@ -575,6 +587,7 @@ unsafe fn win2_effect(fighter: &mut L2CAgentBase) {
 		});
 	}
 }
+
 ///////////////////////////////////////////////////////////////////Effects\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
@@ -619,16 +632,11 @@ unsafe fn entry_game(fighter: &mut L2CAgentBase) {
         });
     }
 	if WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_COLOR) == 6 {
-        acmd!(lua_state,{
-            frame(Frame=3)
-            if(is_excute){
-             if(is_excute){
-	ArticleModule::generate_article(FIGHTER_PICKEL_GENERATE_ARTICLE_SCARIER)
-	methodlib::L2CValue::as_hash()const(FIGHTER_PICKEL_GENERATE_ARTICLE_SCARIER, hash40("entryr"))
-	ArticleModule::change_motion()
-}
-            }
-        });
+		acmd!(lua_state,{
+		if (is_excute) {
+			ArticleModule::change_motion(*FIGHTER_PICKEL_GENERATE_ARTICLE_SCARIER, Hash40::new("win_1"), false, -1.0)
+			}
+ 		});
     }
     else {
         acmd!(lua_state, {
@@ -644,6 +652,37 @@ unsafe fn entry_game(fighter: &mut L2CAgentBase) {
 }
 
 ////////////////////////////////////////////////////////////////////Game\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+
+
+////////////////////////////////////////////////////////////////////Status\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#[status_script(agent = "pickel", status = FIGHTER_STATUS_KIND_DEAD, condition = LUA_SCRIPT_STATUS_FUNC_STATUS_MAIN)]
+unsafe fn dead_sound(fighter: &mut L2CFighterCommon){
+	let lua_state = fighter.lua_state_agent;
+	if  WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_DEAD_MODE) == 0
+		||
+		WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_DEAD_MODE) == 3	{
+			smash_script::macros::PLAY_SE(fighter, Hash40::new("se_pickel_dead"));
+		}
+	if	WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_DEAD_MODE) == 1	{
+			smash_script::macros::PLAY_SE(fighter, Hash40::new("se_pickel_star"));
+
+		}
+	if	WorkModule::get_int(fighter.module_accessor, *FIGHTER_INSTANCE_WORK_ID_INT_DEAD_MODE) == 2{
+			smash_script::macros::PLAY_SE(fighter, Hash40::new("se_pickel_screen"));
+		
+		}
+		fighter.status_Dead();
+}
+////////////////////////////////////////////////////////////////////Status\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
+
+
+
 
 
 //////////////////////////////////////////////////////////////Scripts being installed\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -669,11 +708,11 @@ pub fn install(){
 	appeallw_game,
 	entry_game,
 ////////////////////////////////////////////////////////////////////Game\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\	
-	
-	
-	
-	
-	
 
+	);
+	install_status_scripts!(
+////////////////////////////////////////////////////////////////////Status\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+	dead_sound,
+////////////////////////////////////////////////////////////////////Status\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 	);
 }
